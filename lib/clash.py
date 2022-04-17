@@ -1,8 +1,9 @@
 import os
 import sys
 import time
-
+import json
 import yaml
+import shutil
 
 from util import clash_rule_util
 from util import logger
@@ -40,6 +41,8 @@ class ClashConfig:
         self.converter_path = parser.item(section, 'converter_path')
         self.result_url = parser.item(section, 'result_url')
         self.token = parser.item('github', 'token')
+        item = parser.item('rule', 'config_file')
+        self.rule_files = item.split(',')
 
 
 class Clash:
@@ -106,4 +109,3 @@ class Clash:
             log.info('执行完毕，执行结果：%s', resp.ok)
             if not resp.ok:
                 log.info('执行失败原因：%s\r\n', resp.text)
-

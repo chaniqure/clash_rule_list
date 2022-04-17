@@ -19,12 +19,19 @@ def get_clash_rule_num():
     log.info('OpenClash规则数量：%s', len(rules))
 
 
-def refresh_clash_rule():
+def get_rule():
     base_path = os.getcwd()
     clash = Clash(base_path + '/conf/local.ini', base_path + '/conf/rule.yml')
-    rule = clash.get_clash_rule('reject')
-    log.info('转换后的clash的规则数量：%s', len(rule))
+    log.info('转换后的clash的规则数量：%s', len(clash.get_clash_rule('reject')))
+
+
+def refresh_local_clash_rule():
+    base_path = os.getcwd()
+    clash = Clash(base_path + '/conf/local.ini', base_path + '/conf/rule.yml')
+    clash.write_rule('reject', 'Self_Reject.list')
+    clash.write_rule('direct', 'Self_Direct.list')
+    clash.write_rule('proxy', 'Self_Proxy.list')
 
 
 if __name__ == '__main__':
-    refresh_clash_rule()
+    get_rule()

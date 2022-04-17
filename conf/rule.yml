@@ -14,6 +14,5 @@ rule:
     - 'https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/BanEasyPrivacy.list'
   direct:
     - 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt'
-
   proxy:
     - 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt'
