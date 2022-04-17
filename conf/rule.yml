@@ -1,0 +1,19 @@
+rule:
+  reject:
+#    - 'https://ghproxy.fsofso.com/https://github.com/BlueSkyXN/AdGuardHomeRules/blob/master/all.txt'
+    - 'https://anti-ad.net/clash.yaml'
+    - 'https://anti-ad.net/easylist.txt'
+    - 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt'
+    - 'https://abp.oisd.nl/basic/'
+    - 'https://pgl.yoyo.org/adservers/serverlist.php?hostformat=adblockplus&showintro=1&mimetype=plaintext'
+    - 'https://anti-ad.net/easylist.txt'
+    - 'https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt'
+    - 'https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/BanAD.list'
+    - 'https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/BanEasyList.list'
+    - 'https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/BanEasyListChina.list'
+    - 'https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/BanEasyPrivacy.list'
+  direct:
+    - 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt'
+
+  proxy:
+    - 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt'
