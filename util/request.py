@@ -14,12 +14,14 @@ user_agent_list = [
     "Mozilla/5.0 (Macintosh; U; PPC Mac OS X 10.5; en-US; rv:1.9.2.15) Gecko/20110303 Firefox/3.6.15",
 ]
 
+log = logger.get_logger('request')
+
 
 def get(url):
     try:
         return requests.get(url, get_header()).text
     except ConnectionResetError:
-        logger.error("请求报错：", url)
+        log.error("请求报错：", url)
 
 
 def get_header():

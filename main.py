@@ -4,6 +4,8 @@ import os
 import requests
 
 from lib.clash import Clash
+from lib.github import Github
+from lib.github import GistFile
 from util import logger
 
 log = logger.get_logger('clash')
@@ -26,12 +28,30 @@ def get_rule():
 
 
 def refresh_local_clash_rule():
+    clash = Clash()
+    clash.refresh_local_rule_list('reject', 'Self_Reject.list')
+    clash.refresh_local_rule_list('direct', 'Self_Direct.list')
+    clash.refresh_local_rule_list('proxy', 'Self_Proxy.list')
+
+
+def refresh_remote_clash_rule():
+    clash = Clash()
+    # clash.refresh_remote_rule('self_full_config.yml')
+    clash.refresh_remote()
+
+
+def upload_github():
+    token = ''
+    github = Github(token)
     base_path = os.getcwd()
-    clash = Clash(base_path + '/conf/local.ini', base_path + '/conf/rule.yml')
-    clash.write_rule('reject', 'Self_Reject.list')
-    clash.write_rule('direct', 'Self_Direct.list')
-    clash.write_rule('proxy', 'Self_Proxy.list')
+    with open(base_path + '/self_full_config.yml', 'r', encoding='UTF-8') as f:
+        data = f.read()
+    file = GistFile('test', data.encode("utf-8").decode("latin1"))
+    github.gist_save('test', [file])
 
 
 if __name__ == '__main__':
-    get_rule()
+    # upload_github()
+    # refresh_local_clash_rule()
+    # refresh_remote_clash_rule()
+    refresh_remote_clash_rule()
