@@ -31,6 +31,16 @@ def is_win():
     return sys.platform.startswith('win')
 
 
+def write_data(file: str, data: str):
+    log.info('开始写入文件：%s', file)
+    if os.path.exists(file):
+        os.remove(file)
+        log.info("文件%s已存在，进行删除", file)
+    with open(file, 'w', encoding='utf-8') as f:
+        f.write(data)
+    log.info('写入文件完毕')
+
+
 class ClashConfig:
     def __init__(self, config):
         parser = ini.IniParser(config)
@@ -65,32 +75,38 @@ class Clash:
         elif rule_type == 'proxy':
             urls = self.__remote_rule.proxy
         data = []
-        for url in urls:
-            resp = request.get(url)
-            if resp is None:
-                continue
-            before = len(data)
-            data.extend(clash_rule_util.convert_to_clash_rule_list(resp))
-            log.info('%s：获取数据成功，共：%s条', url, len(data) - before)
+        # for url in urls:
+        #     try:
+        #         resp = request.get(url)
+        #         if resp is None:
+        #             continue
+        #         before = len(data)
+        #         data.extend(clash_rule_util.convert_to_clash_rule_list(resp))
+        #         log.info('%s：获取数据成功，共：%s条', url, len(data) - before)
+        #     except ConnectionError:
+        #         log.error('获取规则失败')
+        if len(data) == 0:
+            log.info('获取在线规则失败，转为获取本地规则')
+            local_rule_dir = os.getcwd() + '/conf/remote_rule_text/' + rule_type
+            for file in os.listdir(local_rule_dir):
+                with open(local_rule_dir + '/' + file, 'r', encoding='utf-8') as f:
+                    file_content = f.read()
+                    data.extend(clash_rule_util.convert_to_clash_rule_list(file_content))
         return list(set(data))
 
+    # 刷新本地的规则集，
     def refresh_local_rule_list(self, rule_type, filename):
         data = self.get_clash_rule(rule_type)
-        file = (self.__clash_config.converter_path + '/rules/{}').format(filename)
-        if os.path.exists(file):
-            os.remove(file)
-            log.info("文件%s已存在，进行删除", file)
         result = list(set(data))
         log.info('数据处理完毕，总共%s条规则', len(result))
         if len(result) == 0:
             log.info('没有规则，结束')
-            exit(0)
-        log.info('开始写入文件')
-        with open(file, 'w', encoding='utf-8') as f:
-            for result in result:
-                f.write(result)
-                f.write("\n")
-        log.info('写入文件完毕')
+            return 0
+        content = '\n'.join(result)
+        converter_rule_file = (self.__clash_config.converter_path + '/rules/{}').format(filename)
+        local_rule_file = (os.getcwd() + '/result/rule_list/{}').format(filename)
+        write_data(converter_rule_file, content)
+        write_data(local_rule_file, content)
 
     def refresh_remote(self):
         if is_win():
@@ -117,11 +133,8 @@ class Clash:
             result = self.__github.gist_batch_save(name, files)
             log.info('同步到github结果：%s', result)
         else:
-            file = os.getcwd() + '/result/' + name
-            with open(file, 'w', encoding='utf-8') as f:
-                f.write(content)
-                f.write("\n")
-            log.info('%s文件写入成功', name)
+            file = os.getcwd() + '/result/subscribe/' + name
+            write_data(file, content)
 
     def __get_sub_url(self, config_rule_file):
         c = self.__clash_config.subconverter_config

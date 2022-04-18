@@ -19,6 +19,7 @@ log = logger.get_logger('request')
 
 def get(url):
     try:
+        requests.session().keep_alive = False
         return requests.get(url, get_header()).text
     except ConnectionResetError:
         log.error("请求报错：", url)
