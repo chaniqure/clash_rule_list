@@ -69,3 +69,4 @@ if __name__ == '__main__':
     # upload_github()
     refresh_local_clash_rule()
     # refresh_remote_clash_rule()
+    # print(requests.get('https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/greatfire.txt').text)

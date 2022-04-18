@@ -75,16 +75,16 @@ class Clash:
         elif rule_type == 'proxy':
             urls = self.__remote_rule.proxy
         data = []
-        # for url in urls:
-        #     try:
-        #         resp = request.get(url)
-        #         if resp is None:
-        #             continue
-        #         before = len(data)
-        #         data.extend(clash_rule_util.convert_to_clash_rule_list(resp))
-        #         log.info('%s：获取数据成功，共：%s条', url, len(data) - before)
-        #     except ConnectionError:
-        #         log.error('获取规则失败')
+        for url in urls:
+            try:
+                resp = request.get(url)
+                if resp is None:
+                    continue
+                before = len(data)
+                data.extend(clash_rule_util.convert_to_clash_rule_list(resp))
+                log.info('%s：获取数据成功，共：%s条', url, len(data) - before)
+            except ConnectionError:
+                log.error('获取规则失败')
         if len(data) == 0:
             log.info('获取在线规则失败，转为获取本地规则')
             local_rule_dir = os.getcwd() + '/conf/remote_rule_text/' + rule_type
