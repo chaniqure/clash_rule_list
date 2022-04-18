@@ -13,6 +13,11 @@ class IniParser:
         parser.read(self.__file, encoding='utf-8')
         return parser.sections()
 
+    def section(self, section):
+        parser = configparser.ConfigParser()
+        parser.read(self.__file, encoding='utf-8')
+        return parser[section]
+
     # 获取section的items
     def items(self, section):
         parser = configparser.ConfigParser()

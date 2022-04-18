@@ -49,7 +49,7 @@ def upload_github():
     github.gist_save('test', [file])
 
 
-def test_github():
+def github_test():
     a = GistFile('a', 'aaaaaaa1')
     b = GistFile('b', 'bbbbbbb1')
     data = [a, b]

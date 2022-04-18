@@ -2,7 +2,7 @@ import os
 import shutil
 import sys
 import time
-
+import urllib.parse
 import yaml
 
 from pkg.lib.github import GistFile
@@ -38,9 +38,9 @@ class ClashConfig:
         if is_win():
             section = 'windows'
         self.converter_path = parser.item(section, 'converter_path')
-        self.result_url = parser.item(section, 'result_url')
         self.token = parser.item('github', 'token')
         self.upload = bool(parser.item('github', 'token'))
+        self.subconverter_config = parser.section('subconverter')
         item = parser.item('rule', 'config_file')
         self.rule_files = item.split(',')
 
@@ -92,6 +92,24 @@ class Clash:
                 f.write("\n")
         log.info('写入文件完毕')
 
+    def refresh_remote(self):
+        if is_win():
+            os.startfile(self.__clash_config.converter_path + '/subconverter.exe')
+            time.sleep(2)
+        for config_rule_file in self.__clash_config.rule_files:
+            file_str = '{}/config/{}'.format(self.__clash_config.converter_path, config_rule_file)
+            if os.path.exists(file_str):
+                os.remove(file_str)
+                log.info("文件%s已存在，进行删除", file_str)
+            shutil.copy(os.getcwd() + '/conf/subconverter_config/' + config_rule_file, file_str)
+            resp = request.get(self.__get_sub_url(config_rule_file))
+            log.info('执行完毕，获取到的数据长度：%s', len(resp))
+            self.__hand_result(config_rule_file, resp)
+        if is_win():
+            time.sleep(1)
+            os.system('taskkill /f /im %s' % 'subconverter.exe')
+            log.info('关闭程序成功')
+
     def __hand_result(self, name, content):
         if self.__clash_config.upload:
             rule_file = GistFile(name, content.encode("utf-8").decode("latin1"))
@@ -105,20 +123,16 @@ class Clash:
                 f.write("\n")
             log.info('%s文件写入成功', name)
 
-    def refresh_remote(self):
-        if is_win():
-            os.startfile(self.__clash_config.converter_path + '/subconverter.exe')
-            time.sleep(2)
-        file_str = self.__clash_config.converter_path + '/config/self_config.yml'
-        for rule in self.__clash_config.rule_files:
-            if os.path.exists(file_str):
-                os.remove(file_str)
-                log.info("文件%s已存在，进行删除", file_str)
-            shutil.copy(os.getcwd() + '/conf/subconverter_config/' + rule, file_str)
-            resp = request.get(self.__clash_config.result_url)
-            log.info('执行完毕，获取到的数据长度：%s', len(resp))
-            self.__hand_result(rule, resp)
-        if is_win():
-            time.sleep(1)
-            os.system('taskkill /f /im %s' % 'subconverter.exe')
-            log.info('关闭程序成功')
+    def __get_sub_url(self, config_rule_file):
+        c = self.__clash_config.subconverter_config
+        data = [urllib.parse.urlencode({'config': 'config/{}'.format(config_rule_file)}), 'target=clash']
+        sub_url_prefix = 'http://127.0.0.1:25500/sub?'
+        for key, value in c.items():
+            value = value.strip()
+            if value == '':
+                continue
+            if key == 'url':
+                data.append(urllib.parse.urlencode({'url': value}))
+                continue
+            data.append('{}={}'.format(key, value))
+        return sub_url_prefix + '&'.join(data)
