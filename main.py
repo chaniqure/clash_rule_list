@@ -3,10 +3,10 @@ import os
 
 import requests
 
-from lib.clash import Clash
-from lib.github import Github
-from lib.github import GistFile
-from util import logger
+from pkg.lib.clash import Clash
+from pkg.lib.github import Github
+from pkg.lib.github import GistFile
+from pkg.util import logger
 
 log = logger.get_logger('clash')
 
@@ -22,8 +22,7 @@ def get_clash_rule_num():
 
 
 def get_rule():
-    base_path = os.getcwd()
-    clash = Clash(base_path + '/conf/local.ini', base_path + '/conf/rule.yml')
+    clash = Clash()
     log.info('转换后的clash的规则数量：%s', len(clash.get_clash_rule('reject')))
 
 
@@ -50,8 +49,23 @@ def upload_github():
     github.gist_save('test', [file])
 
 
+def test_github():
+    a = GistFile('a', 'aaaaaaa1')
+    b = GistFile('b', 'bbbbbbb1')
+    data = [a, b]
+    # req = GistCreateRequest('test', False, data)
+    # json_dumps = json.dumps(obj=a.__dict__, ensure_ascii=False)
+    # print(type(json.loads(json_dumps)))
+    # payload = GistCreateRequest(files, False, description)
+    github = Github('')
+    # print(github.gist_list())
+    # print(github.gist_batch_save('test', data))
+    # github.gist_create('test', 'b', 'bbbbbbbb')
+    # github.gist_update('test', '111111111111111111')
+    print(github.gist_list())
+
+
 if __name__ == '__main__':
     # upload_github()
     # refresh_local_clash_rule()
-    # refresh_remote_clash_rule()
     refresh_remote_clash_rule()

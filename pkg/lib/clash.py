@@ -5,19 +5,16 @@ import time
 
 import yaml
 
-from lib.github import GistFile
-from lib.github import Github
-from util import clash_rule_util
-from util import ini
-from util import logger
-from util import request
+from pkg.lib.github import GistFile
+from pkg.lib.github import Github
+from pkg.util import logger, ini, request, clash_rule_util
 
 # 文档地址 https://github.com/tindy2013/subconverter/blob/master/README-cn.md#%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0
 # 拒绝策略
 log = logger.get_logger('clash')
 
 
-class RemoteClashRule:
+class RemoteClashRuleList:
     def __init__(self, file):
         with open(file, 'r', encoding='utf-8') as f:
             file_content = f.read()
@@ -43,6 +40,7 @@ class ClashConfig:
         self.converter_path = parser.item(section, 'converter_path')
         self.result_url = parser.item(section, 'result_url')
         self.token = parser.item('github', 'token')
+        self.upload = bool(parser.item('github', 'token'))
         item = parser.item('rule', 'config_file')
         self.rule_files = item.split(',')
 
@@ -55,7 +53,7 @@ class Clash:
         rule_config = base_path + '/conf/rule.yml'
         # 获取所有section
         self.__clash_config = ClashConfig(converter_config)
-        self.__remote_rule = RemoteClashRule(rule_config)
+        self.__remote_rule = RemoteClashRuleList(rule_config)
         self.__github = Github(self.__clash_config.token)
 
     def get_clash_rule(self, rule_type):
@@ -72,13 +70,7 @@ class Clash:
             if resp is None:
                 continue
             before = len(data)
-            domain_list = resp.split("\n")
-            if len(domain_list) > 0:
-                for domain in domain_list:
-                    s = clash_rule_util.convert(domain)
-                    if str.isspace(s):
-                        continue
-                    data.append(s)
+            data.extend(clash_rule_util.convert_to_clash_rule_list(resp))
             log.info('%s：获取数据成功，共：%s条', url, len(data) - before)
         return list(set(data))
 
@@ -100,11 +92,18 @@ class Clash:
                 f.write("\n")
         log.info('写入文件完毕')
 
-    def __upload_github(self, name, content):
-        rule_file = GistFile(name, content.encode("utf-8").decode("latin1"))
-        files = [rule_file]
-        result = self.__github.gist_batch_save('self custom clash rule', files)
-        log.info('同步到github结果：%s', result)
+    def __hand_result(self, name, content):
+        if self.__clash_config.upload:
+            rule_file = GistFile(name, content.encode("utf-8").decode("latin1"))
+            files = [rule_file]
+            result = self.__github.gist_batch_save(name, files)
+            log.info('同步到github结果：%s', result)
+        else:
+            file = os.getcwd() + '/result/' + name
+            with open(file, 'w', encoding='utf-8') as f:
+                f.write(content)
+                f.write("\n")
+            log.info('%s文件写入成功', name)
 
     def refresh_remote(self):
         if is_win():
@@ -115,10 +114,10 @@ class Clash:
             if os.path.exists(file_str):
                 os.remove(file_str)
                 log.info("文件%s已存在，进行删除", file_str)
-            shutil.copy(os.getcwd() + '/rule/' + rule, file_str)
+            shutil.copy(os.getcwd() + '/conf/subconverter_config/' + rule, file_str)
             resp = request.get(self.__clash_config.result_url)
             log.info('执行完毕，获取到的数据长度：%s', len(resp))
-            self.__upload_github(rule.split('.')[0], resp)
+            self.__hand_result(rule, resp)
         if is_win():
             time.sleep(1)
             os.system('taskkill /f /im %s' % 'subconverter.exe')

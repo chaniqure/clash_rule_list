@@ -1,7 +1,7 @@
 # 设置代理头，防止被远程服务器安全策略断开连接
 import random
 import requests
-from util import logger
+from pkg.util import logger
 
 user_agent_list = [
     "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36",
@@ -25,4 +25,7 @@ def get(url):
 
 
 def get_header():
-    return {'User-Agent': random.choice(user_agent_list)}
+    return {
+        'User-Agent': random.choice(user_agent_list),
+        'Connection': 'close'
+    }

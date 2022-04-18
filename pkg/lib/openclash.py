@@ -1,7 +1,7 @@
 import requests
 import os
 
-from util import logger
+from pkg.util import logger
 
 data_list = ["reject", "icloud", "apple", "google", "proxy", "direct", "private", "gfw",
              "greatfire", "tld-not-cn", "telegramcidr", "cncidr", "lancidr", "applications"]

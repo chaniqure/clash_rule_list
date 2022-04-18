@@ -2,7 +2,7 @@ import json
 
 import requests
 
-from util import logger
+from pkg.util import logger
 
 log = logger.get_logger('clash')
 
@@ -73,19 +73,3 @@ class Github:
         for d in gists:
             if d['description'] == name:
                 return d['id']
-
-
-if __name__ == '__main__':
-    a = GistFile('a', 'aaaaaaa1')
-    b = GistFile('b', 'bbbbbbb1')
-    data = [a, b]
-    # req = GistCreateRequest('test', False, data)
-    # json_dumps = json.dumps(obj=a.__dict__, ensure_ascii=False)
-    # print(type(json.loads(json_dumps)))
-    # payload = GistCreateRequest(files, False, description)
-    github = Github('')
-    # print(github.gist_list())
-    # print(github.gist_batch_save('test', data))
-    # github.gist_create('test', 'b', 'bbbbbbbb')
-    # github.gist_update('test', '111111111111111111')
-    print(github.gist_list())
