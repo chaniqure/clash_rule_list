@@ -235,7 +235,6 @@ rules:
  - RULE-SET,BanEasyListChina,🛑 广告拦截
  - RULE-SET,BanEasyPrivacy,🛑 广告拦截
  - RULE-SET,anti-ad-clash,🛑 广告拦截
- - RULE-SET,filter,🛑 广告拦截
  - RULE-SET,serverlist,🛑 广告拦截
  - RULE-SET,basic,🛑 广告拦截
  - RULE-SET,reject,🛑 广告拦截

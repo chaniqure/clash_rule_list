@@ -3119,9 +3119,7 @@ payload:
   - DOMAIN-SUFFIX,ws-gateway.com
   - DOMAIN-SUFFIX,wsp.adskeeper.co.uk
   - DOMAIN,www.fuze-hill
-  - DOMAIN-KEYWORD,xyz
   - DOMAIN,www.fuze-sea
-  - DOMAIN-KEYWORD,xyz
   - DOMAIN-SUFFIX,xpostx.com
   - DOMAIN-SUFFIX,yesadvertising.com
   - DOMAIN-SUFFIX,zanox.com
@@ -3400,11 +3398,9 @@ payload:
   - DOMAIN-SUFFIX,besstahete.info
   - DOMAIN-SUFFIX,statpipe.ru
   - DOMAIN-KEYWORD,hostingcloud
-  - DOMAIN-KEYWORD,wasm
   - DOMAIN-SUFFIX,sentemanactri.com
   - DOMAIN-SUFFIX,feesocrald.com
   - DOMAIN-SUFFIX,cashbeet.com
-  - DOMAIN-KEYWORD,play
   - DOMAIN-SUFFIX,videos.vidto.me
   - DOMAIN-SUFFIX,nextbdom.ru
   - DOMAIN-SUFFIX,ugmfvqsu.ru
@@ -3548,11 +3544,8 @@ payload:
   - DOMAIN-SUFFIX,freecontent.bid
   - DOMAIN-SUFFIX,freecontent.racing
   - DOMAIN-SUFFIX,freecontent.stream
-  - DOMAIN-KEYWORD,s
   - DOMAIN-SUFFIX,web.flashx.co
-  - DOMAIN-KEYWORD,s
   - DOMAIN-SUFFIX,site.flashx.cc
-  - DOMAIN-KEYWORD,s
   - DOMAIN-SUFFIX,skencituer.com
   - DOMAIN-SUFFIX,mine.torrent.pw
   - DOMAIN-SUFFIX,006a039c957c142bb.com
@@ -21795,7 +21788,6 @@ payload:
   - DOMAIN-SUFFIX,haorun.pw
   - DOMAIN-SUFFIX,ts166.net
   - DOMAIN-SUFFIX,tccbanner.com
-  - DOMAIN-KEYWORD,banner
   - DOMAIN-SUFFIX,tccapis.com
   - DOMAIN-SUFFIX,ads-game-configuration-master.ads.prd.ie.internal.unity3d.com
   - DOMAIN-SUFFIX,cdp.cloud.unity3d.com
@@ -21813,7 +21805,6 @@ payload:
   - DOMAIN-SUFFIX,cafe-latte.myshoplus.com
   - DOMAIN-SUFFIX,luckyforworlds.com
   - DOMAIN-SUFFIX,cdn-adn.rayjump.com
-  - DOMAIN-KEYWORD,cdn-adn-
   - DOMAIN-SUFFIX,rayjump.com
   - DOMAIN-SUFFIX,casino-ad-mediation.me2zengame.com
   - DOMAIN-SUFFIX,postut.cn
@@ -21880,10 +21871,8 @@ payload:
   - DOMAIN-SUFFIX,api.ampiri.com
   - DOMAIN-SUFFIX,rtb.kds.media
   - DOMAIN-SUFFIX,splicky.com
-  - DOMAIN-KEYWORD,api
   - DOMAIN-SUFFIX,batmobi.net
   - DOMAIN-SUFFIX,cdn.batmobi.net
-  - DOMAIN-KEYWORD,api
   - DOMAIN-SUFFIX,batmobil.net
   - DOMAIN-SUFFIX,us.3zs0.date
   - DOMAIN-SUFFIX,tkmftc.aotter.net
@@ -21953,7 +21942,6 @@ payload:
   - DOMAIN-SUFFIX,admarvel.com
   - DOMAIN-SUFFIX,mopub-win-us-east.bksn.se
   - DOMAIN-SUFFIX,nativead.s3.amazonaws.com
-  - DOMAIN-KEYWORD,adserver
   - DOMAIN-SUFFIX,yahoodns.net
   - DOMAIN-SUFFIX,eu-ad.sam4m.com
   - DOMAIN-SUFFIX,c2i.startappnetwork.com
@@ -21972,7 +21960,6 @@ payload:
   - DOMAIN-SUFFIX,o0e.ru
   - DOMAIN-SUFFIX,1mp.mobi
   - DOMAIN-SUFFIX,abtest.swrve.com
-  - DOMAIN-KEYWORD,ad
   - DOMAIN-SUFFIX,nexage.com
   - DOMAIN-SUFFIX,ad-brix.com
   - DOMAIN-SUFFIX,ad-x.co.uk
@@ -22132,7 +22119,6 @@ payload:
   - DOMAIN-SUFFIX,i-mobile.co.jp
   - DOMAIN-SUFFIX,i-vengo.com
   - DOMAIN-SUFFIX,iad.appboy.com
-  - DOMAIN-KEYWORD,iad-
   - DOMAIN-SUFFIX,appboy.com
   - DOMAIN-SUFFIX,iadsdk.apple.com
   - DOMAIN-SUFFIX,iamediaserve.com
@@ -22160,11 +22146,9 @@ payload:
   - DOMAIN-SUFFIX,madnet.ru
   - DOMAIN-SUFFIX,mads.bz
   - DOMAIN-SUFFIX,manage.com
-  - DOMAIN-KEYWORD,marketplace-ios-
   - DOMAIN-SUFFIX,hyprmx.com
   - DOMAIN-SUFFIX,mbn.com.ua
   - DOMAIN-SUFFIX,mdotm.com
-  - DOMAIN-KEYWORD,mediate-ios-
   - DOMAIN-SUFFIX,hyprmx.com
   - DOMAIN-SUFFIX,metamx.com
   - DOMAIN-SUFFIX,mgage.com
