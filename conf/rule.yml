@@ -1,3 +1,4 @@
+# 用于转换第三方规则为clash版本的rule_list和rule_provider
 rule-list:
   reject:
 #    - 'https://ghproxy.fsofso.com/https://github.com/BlueSkyXN/AdGuardHomeRules/blob/master/all.txt'
@@ -16,6 +17,7 @@ rule-list:
   proxy:
     - 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt'
 
+# 用于最后拼接到
 rule-providers:
   reject:
     type: http
@@ -101,3 +103,96 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt"
     path: ./ruleset/applications.yaml
     interval: 86400
+  BanAD:
+    type: http
+    behavior: domain
+    url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/BanAD.yaml"
+    path: ./ruleset/BanAD.yaml
+    interval: 86400
+  BanEasyList:
+    type: http
+    behavior: domain
+    url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyList.yaml"
+    path: ./ruleset/BanEasyList.yaml
+    interval: 86400
+  BanEasyListChina:
+    type: http
+    behavior: domain
+    url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyListChina.yaml"
+    path: ./ruleset/BanEasyListChina.yaml
+    interval: 86400
+  BanEasyPrivacy:
+    type: http
+    behavior: domain
+    url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyPrivacy.yaml"
+    path: ./ruleset/BanEasyPrivacy.yaml
+    interval: 86400
+  YouTube:
+    type: http
+    behavior: domain
+    url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/YouTube.yaml"
+    path: ./ruleset/YouTube.yaml
+    interval: 86400
+  HBO:
+    type: http
+    behavior: domain
+    url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/HBO.yaml"
+    path: ./ruleset/HBO.yaml
+    interval: 86400
+  Netflix:
+    type: http
+    behavior: domain
+    url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Netflix.yaml"
+    path: ./ruleset/Netflix.yaml
+    interval: 86400
+  Bilibili:
+    type: http
+    behavior: domain
+    url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Bilibili.yaml"
+    path: ./ruleset/Bilibili.yaml
+    interval: 86400
+  BilibiliHMT:
+    type: http
+    behavior: domain
+    url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/BilibiliHMT.yaml"
+    path: ./ruleset/BilibiliHMT.yaml
+    interval: 86400
+  Xbox:
+    type: http
+    behavior: domain
+    url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Xbox.yaml"
+    path: ./ruleset/Xbox.yaml
+    interval: 86400
+  Steam:
+    type: http
+    behavior: domain
+    url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Steam.yaml"
+    path: ./ruleset/Steam.yaml
+    interval: 86400
+  Sony:
+    type: http
+    behavior: domain
+    url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Sony.yaml"
+    path: ./ruleset/Sony.yaml
+    interval: 86400
+  Amazon:
+    type: http
+    behavior: domain
+    url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Amazon.yaml"
+    path: ./ruleset/Amazon.yaml
+    interval: 86400
+rules-set-config:
+  direct:
+    - applications
+    - private
+    - icloud
+    - apple
+#    - google
+    - direct
+    - lancidr
+    - cncidr
+  reject:
+    - reject
+  proxy:
+    - proxy
+    - telegramcidr

@@ -15,12 +15,15 @@ from pkg.util import file_util
 log = logger.get_logger('clash')
 
 
-class RemoteClashRuleList:
+class RemoteClashRuleConfig:
     def __init__(self, file):
-        content = yaml.load(file_util.read(file), yaml.FullLoader)
+        content = file_util.read(file)
+        content = yaml.load(content, yaml.FullLoader)
         self.reject = content['rule-list']['reject']
         self.direct = content['rule-list']['direct']
         self.proxy = content['rule-list']['proxy']
+        self.rules = file_util.find_str_between(content, 'rules', '')
+        self.rule_providers = file_util.find_str_between(content, 'rule-providers', 'rules')
 
     def __str__(self):
         return '{}\n\treject：{}\n\tdirect：{}\n\tproxy：{}\n{}'.format('{', self.reject, self.direct, self.proxy, '}')
@@ -52,7 +55,7 @@ class Clash:
         rule_config = base_path + '/conf/rule.yml'
         # 获取所有section
         self.__clash_config = ClashConfig(converter_config)
-        self.__remote_rule = RemoteClashRuleList(rule_config)
+        self.__remote_rule = RemoteClashRuleConfig(rule_config)
         self.__github = Github(self.__clash_config.token)
 
     def __get_urls(self, rule_type):
@@ -114,7 +117,7 @@ class Clash:
             log.info('没有规则，结束')
             return 0
         content = '\n'.join(result)
-        converter_rule_file = (self.__clash_config.converter_path + '/rules/{}').format(filename)
+        # converter_rule_file = (self.__clash_config.converter_path + '/rules/{}').format(filename)
         local_rule_file = (os.getcwd() + '/result/rule_list/{}').format(filename)
         # file_util.write(converter_rule_file, content)
         file_util.write(local_rule_file, content)

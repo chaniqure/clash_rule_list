@@ -31,7 +31,6 @@ custom:
     - {group: "🛑 广告拦截", ruleset: "rules/Self_Reject.list", interval: 86400}
     - {group: "🍃 应用净化", ruleset: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list", interval: 86400}
     - {group: "📢 谷歌FCM", ruleset: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list", interval: 86400}
-    - {group: "🎯 全球直连", ruleset: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list", interval: 86400}
     - {group: "Ⓜ 微软服务", ruleset: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/OneDrive.list", interval: 86400}
     - {group: "Ⓜ 微软服务", ruleset: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list", interval: 86400}
     - {group: "🍎 苹果服务", ruleset: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Apple.list", interval: 86400}
@@ -44,11 +43,12 @@ custom:
     - {group: "🎥 奈飞视频", ruleset: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Ruleset/AmazonIp.list", interval: 86400}
     - {group: "📺 哔哩哔哩", ruleset: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list", interval: 86400}
     - {group: "📺 哔哩哔哩", ruleset: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bilibili.list", interval: 86400}
-    - { group: "🎯 全球直连", ruleset: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list", interval: 86400 }
-    - { group: "🎯 全球直连", ruleset: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/UnBan.list", interval: 86400 }
-    - { group: "🎯 全球直连", ruleset: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/ChinaIp.list", interval: 86400 }
-    - { group: "🎯 全球直连", ruleset: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list", interval: 86400 }
-    - { group: "🎯 全球直连", ruleset: "rules/Self_Direct.list", interval: 86400 }
+    - {group: "🎯 全球直连", ruleset: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list", interval: 86400}
+    - {group: "🎯 全球直连", ruleset: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list", interval: 86400 }
+    - {group: "🎯 全球直连", ruleset: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/UnBan.list", interval: 86400 }
+    - {group: "🎯 全球直连", ruleset: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/ChinaIp.list", interval: 86400 }
+    - {group: "🎯 全球直连", ruleset: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list", interval: 86400 }
+    - {group: "🎯 全球直连", ruleset: "rules/Self_Direct.list", interval: 86400 }
     - {group: "🚀 节点选择", ruleset: "rules/Self_Proxy.list", interval: 86400}
     - {group: "🎯 全球直连", rule: "GEOIP,CN"}
     - {group: "🐟 漏网之鱼", rule: "FINAL"}
