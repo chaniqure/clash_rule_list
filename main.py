@@ -43,8 +43,8 @@ def refresh_local_rule_provider():
     clash = Clash()
     # clash.refresh_remote_rule('self_full_config.yml')
     clash.refresh_local_rule_provider('reject')
-    clash.refresh_local_rule_provider('direct')
-    clash.refresh_local_rule_provider('proxy')
+    # clash.refresh_local_rule_provider('direct')
+    # clash.refresh_local_rule_provider('proxy')
 
 
 def upload_github():
@@ -74,6 +74,7 @@ def github_test():
 
 
 if __name__ == '__main__':
+    # refresh_remote_clash_rule()
     # upload_github()
     # refresh_local_clash_rule()
     # refresh_remote_clash_rule()

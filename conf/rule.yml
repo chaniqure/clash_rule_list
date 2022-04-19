@@ -2,16 +2,9 @@
 rule-list:
   reject:
 #    - 'https://ghproxy.fsofso.com/https://github.com/BlueSkyXN/AdGuardHomeRules/blob/master/all.txt'
-    - 'https://anti-ad.net/clash.yaml'
-    - 'https://anti-ad.net/easylist.txt'
-    - 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt'
     - 'https://abp.oisd.nl/basic/'
     - 'https://pgl.yoyo.org/adservers/serverlist.php?hostformat=adblockplus&showintro=1&mimetype=plaintext'
     - 'https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt'
-    - 'https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/BanAD.list'
-    - 'https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/BanEasyList.list'
-    - 'https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/BanEasyListChina.list'
-    - 'https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/BanEasyPrivacy.list'
   direct:
     - 'https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt'
   proxy:
@@ -103,6 +96,12 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt"
     path: ./ruleset/applications.yaml
     interval: 86400
+  LocalAreaNetwork:
+    type: http
+    behavior: classical
+    url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/LocalAreaNetwork.yaml"
+    path: ./ruleset/LocalAreaNetwork.yaml
+    interval: 86400
   BanAD:
     type: http
     behavior: domain
@@ -111,19 +110,25 @@ rule-providers:
     interval: 86400
   BanEasyList:
     type: http
-    behavior: domain
+    behavior: classical
     url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyList.yaml"
     path: ./ruleset/BanEasyList.yaml
     interval: 86400
-  BanEasyListChina:
+  UnBan:
     type: http
     behavior: domain
+    url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/UnBan.yaml"
+    path: ./ruleset/UnBan.yaml
+    interval: 86400
+  BanEasyListChina:
+    type: http
+    behavior: classical
     url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyListChina.yaml"
     path: ./ruleset/BanEasyListChina.yaml
     interval: 86400
   BanEasyPrivacy:
     type: http
-    behavior: domain
+    behavior: classical
     url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/BanEasyPrivacy.yaml"
     path: ./ruleset/BanEasyPrivacy.yaml
     interval: 86400
@@ -141,7 +146,7 @@ rule-providers:
     interval: 86400
   Netflix:
     type: http
-    behavior: domain
+    behavior: classical
     url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Netflix.yaml"
     path: ./ruleset/Netflix.yaml
     interval: 86400
@@ -153,7 +158,7 @@ rule-providers:
     interval: 86400
   BilibiliHMT:
     type: http
-    behavior: domain
+    behavior: classical
     url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/BilibiliHMT.yaml"
     path: ./ruleset/BilibiliHMT.yaml
     interval: 86400
@@ -177,7 +182,7 @@ rule-providers:
     interval: 86400
   Amazon:
     type: http
-    behavior: domain
+    behavior: classical
     url: "https://hk1.monika.love/ACL4SSR/ACL4SSR/master/Clash/Providers/Ruleset/Amazon.yaml"
     path: ./ruleset/Amazon.yaml
     interval: 86400

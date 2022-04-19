@@ -18,10 +18,10 @@ log = logger.get_logger('clash')
 class RemoteClashRuleConfig:
     def __init__(self, file):
         content = file_util.read(file)
-        content = yaml.load(content, yaml.FullLoader)
-        self.reject = content['rule-list']['reject']
-        self.direct = content['rule-list']['direct']
-        self.proxy = content['rule-list']['proxy']
+        d = yaml.load(content, yaml.FullLoader)
+        self.reject = d['rule-list']['reject']
+        self.direct = d['rule-list']['direct']
+        self.proxy = d['rule-list']['proxy']
         self.rules = file_util.find_str_between(content, 'rules', '')
         self.rule_providers = file_util.find_str_between(content, 'rule-providers', 'rules')
 

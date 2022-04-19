@@ -1,7 +1,4 @@
 payload:
-  - DOMAIN-KEYWORD,Adblock
-  - DOMAIN-KEYWORD,Plus
-  - DOMAIN-SUFFIX,1.1
   - DOMAIN-SUFFIX,1-1ads.com
   - DOMAIN-SUFFIX,101com.com
   - DOMAIN-SUFFIX,101order.com
