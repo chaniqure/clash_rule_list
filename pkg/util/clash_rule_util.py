@@ -18,7 +18,7 @@ ip_regex = '[0-9]+(?:\\.[0-9]+){3}'
 
 def format_domain(s: str):
     s = s.strip()
-    if s == '' or s == '.':
+    if s == '' or s == '.' or s == '-':
         return ''
     if s.startswith('.'):
         s = s.removeprefix('.')
@@ -37,6 +37,8 @@ def convert_to_clash_rule_list(text: str):
             continue
         if s.startswith('0.0.0.0') or s.startswith('127.0.0.1'):
             s = s.removeprefix('0.0.0.0').removeprefix('127.0.0.1')
+        if s.startswith('DOMAIN'):
+            s = s.split(',')[1]
         effective_list.append(s)
     after = '\n'.join(effective_list)
     domain_list = re.findall(domain_regex, after)
@@ -51,6 +53,8 @@ def convert_to_clash_rule_list(text: str):
             arr = len(s.split('.'))
             if arr == 1:
                 prefix = 'DOMAIN-KEYWORD,'
+                if s == '':
+                    continue
         result.append(prefix + s)
     for ip in ip_list:
         result.append('IP-CIDR,' + ip + '/32,no-resolve')
@@ -58,46 +62,10 @@ def convert_to_clash_rule_list(text: str):
 
 
 def convert_to_clash_rule_provider(text: str):
-    before_list = text.split("\n")
-    effective_list = []
-    for domain in before_list:
-        s = domain.strip()
-        if s.startswith('!') or s.startswith('#') or s.startswith('&') or s.startswith('[') \
-                or s.startswith('/') or s.endswith('/') or s.endswith('='):
-            continue
-        if s.startswith('-') and not s.startswith('- \'') and not s.startswith('- DOMAIN'):
-            continue
-        if s.__contains__('?') or s.__contains__('/') or s.__contains__('*') or s.__contains__('$'):
-            continue
-        if s.startswith('payload:'):
-            return text
-        if s.startswith('0.0.0.0') or s.startswith('127.0.0.1'):
-            s = s.removeprefix('0.0.0.0').removeprefix('127.0.0.1')
-        if s.startswith('DOMAIN-SUFFIX,'):
-            s = s.removeprefix('DOMAIN-SUFFIX,')
-        if s.startswith('DOMAIN-KEYWORD,'):
-            s = s.removeprefix('DOMAIN-KEYWORD,')
-        if s.startswith('DOMAIN,'):
-            s = s.removeprefix('DOMAIN,')
-        effective_list.append(s)
-    after = '\n'.join(effective_list)
-    domain_list = re.findall(domain_regex, after)
+    data = convert_to_clash_rule_list(text)
     result = []
-    keyword_template = '  - \'+.{}.+\''
-    domain_template = '  - \'{}\''
-    domain_regex_template = '  - \'+.{}\''
-    for domain in domain_list:
-        s = format_domain(str(domain))
-        if s.startswith('www'):
-            result.append(domain_template.format(s))
-        else:
-            arr = len(s.split('.'))
-            if arr == 1:
-                result.append(keyword_template.format(s))
-            elif arr == 2:
-                result.append(domain_regex_template.format(s))
-            else:
-                result.append(domain_template.format(s))
+    for d in data:
+        result.append('  - ' + d)
     return 'payload:\n' + '\n'.join(result)
 
 
