@@ -23,7 +23,7 @@ def get_clash_rule_num():
 
 def get_rule():
     clash = Clash()
-    log.info('转换后的clash的规则数量：%s', len(clash.get_clash_rule('reject')))
+    log.info('转换后的clash的规则数量：%s', len(clash.get_clash_rule_list('reject')))
 
 
 def refresh_local_clash_rule():
@@ -37,6 +37,14 @@ def refresh_remote_clash_rule():
     clash = Clash()
     # clash.refresh_remote_rule('self_full_config.yml')
     clash.refresh_remote()
+
+
+def refresh_local_rule_provider():
+    clash = Clash()
+    # clash.refresh_remote_rule('self_full_config.yml')
+    clash.refresh_local_rule_provider('reject')
+    clash.refresh_local_rule_provider('direct')
+    clash.refresh_local_rule_provider('proxy')
 
 
 def upload_github():
@@ -69,4 +77,5 @@ if __name__ == '__main__':
     # upload_github()
     refresh_local_clash_rule()
     # refresh_remote_clash_rule()
+    refresh_local_rule_provider()
     # print(requests.get('https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/greatfire.txt').text)

@@ -1,4 +1,4 @@
-rule:
+rule-list:
   reject:
 #    - 'https://ghproxy.fsofso.com/https://github.com/BlueSkyXN/AdGuardHomeRules/blob/master/all.txt'
     - 'https://anti-ad.net/clash.yaml'
