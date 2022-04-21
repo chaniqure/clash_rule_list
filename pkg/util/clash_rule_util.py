@@ -65,6 +65,8 @@ def convert_to_clash_rule_provider(text: str):
     data = convert_to_clash_rule_list(text)
     result = []
     for d in data:
+        if d.__contains__('DOMAIN-KEYWORD'):
+            continue
         result.append('  - ' + d)
     return 'payload:\n' + '\n'.join(result)
 

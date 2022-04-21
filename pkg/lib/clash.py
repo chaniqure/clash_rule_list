@@ -117,9 +117,9 @@ class Clash:
             log.info('没有规则，结束')
             return 0
         content = '\n'.join(result)
-        # converter_rule_file = (self.__clash_config.converter_path + '/rules/{}').format(filename)
+        converter_rule_file = (self.__clash_config.converter_path + '/rules/{}').format(filename)
         local_rule_file = (os.getcwd() + '/result/rule_list/{}').format(filename)
-        # file_util.write(converter_rule_file, content)
+        file_util.write(converter_rule_file, content)
         file_util.write(local_rule_file, content)
 
     def refresh_local_rule_provider(self, rule_type):
