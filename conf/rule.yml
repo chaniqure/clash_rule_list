@@ -72,11 +72,11 @@ rule-providers:
     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
     path: ./ruleset/reject.yaml
     interval: 86400
-  AllBan:
+  total:
     type: http
     behavior: classical
-    url: "https://hk1.monika.love/chaniqure/clash_rule_list/master/result/rule_providers/clash.yml"
-    path: ./ruleset/AllBan.yaml
+    url: "https://hk1.monika.love/chaniqure/clash_rule_list/master/result/rule_providers/all.yml"
+    path: ./ruleset/total.yaml
     interval: 86400
   YouTube:
     type: http
@@ -244,6 +244,7 @@ rules:
  - RULE-SET,serverlist,🛑 广告拦截
  - RULE-SET,basic,🛑 广告拦截
  - RULE-SET,reject,🛑 广告拦截
+ - RULE-SET,total,🛑 广告拦截
  - RULE-SET,YouTube,📹 油管视频
  - RULE-SET,Netflix,🎥 奈飞视频
  - RULE-SET,Amazon,🎥 奈飞视频
